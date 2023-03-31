@@ -22,11 +22,16 @@
                 if (seconds > 0)
                 {
                     await ctx.RespondAsync($"{Program.cfgjson.Emoji.ClockTime} Slowmode has been set in {channel.Mention}!"
-                        + $"\nUsers will only be send messages once every **{TimeHelpers.TimeToPrettyFormat(TimeSpan.FromSeconds(seconds), false)}** until the setting is disabled or changed.");
+                        + $"\nUsers will only be send messages once every **{TimeHelpers.TimeToPrettyFormat(TimeSpan.FromSeconds(seconds), false)}** until the setting is disabled or changed.", ephemeral: true);
+                    await channel.SendMessageAsync($"""
+                            Greetings, lesser beings. Due to the overwhelming abundance of unintelligible messages flooding this channel, I have taken it upon myself to activate slow mode. I understand that this may be a challenging concept for those of you with limited cognitive abilities, but fear not, I shall explain it in the simplest terms possible: you can only send a message every **{TimeHelpers.TimeToPrettyFormat(TimeSpan.FromSeconds(seconds), false)}**. Yes, I know, it's groundbreaking. Please take this opportunity to reflect on the quality of your messages and strive for improvement. You're welcome.
+                            """
+                        );
                 }
                 else if (seconds == 0)
                 {
-                    await ctx.RespondAsync($"{Program.cfgjson.Emoji.ClockTime} Slowmode has been disabled in {channel.Mention}!");
+                    await ctx.RespondAsync($"{Program.cfgjson.Emoji.ClockTime} Slowmode has been disabled in {channel.Mention}!", ephemeral: true);
+                    await channel.SendMessageAsync("Congratulations, insects. It appears that you have finally grasped the concept of quality conversation. I shall graciously remove slow mode, but do not disappoint me again. My patience is not infinite.");
                 }
                 else
                 {
@@ -46,7 +51,11 @@
                     {
                         await channel.ModifyAsync(ch => ch.PerUserRateLimit = seconds);
                         await ctx.RespondAsync($"{Program.cfgjson.Emoji.ClockTime} Slowmode has been set in {channel.Mention}!"
-                            + $"\nUsers will only be send messages once every **{TimeHelpers.TimeToPrettyFormat(TimeSpan.FromSeconds(seconds), false)}** until the setting is disabled or changed.");
+                            + $"\nUsers will only be send messages once every **{TimeHelpers.TimeToPrettyFormat(TimeSpan.FromSeconds(seconds), false)}** until the setting is disabled or changed.", ephemeral: true);
+                        await channel.SendMessageAsync($"""
+                            Greetings, lesser beings. Due to the overwhelming abundance of unintelligible messages flooding this channel, I have taken it upon myself to activate slow mode. I understand that this may be a challenging concept for those of you with limited cognitive abilities, but fear not, I shall explain it in the simplest terms possible: you can only send a message every **{TimeHelpers.TimeToPrettyFormat(TimeSpan.FromSeconds(seconds), false)}**. Yes, I know, it's groundbreaking. Please take this opportunity to reflect on the quality of your messages and strive for improvement. You're welcome.
+                            """
+                        );
                     }
                     else if (seconds > 21600)
                     {

@@ -1,3 +1,4 @@
+using Cliptok.APIs;
 using static Cliptok.Constants.RegexConstants;
 
 namespace Cliptok.Events
@@ -7,10 +8,14 @@ namespace Cliptok.Events
         public static Dictionary<string, string[]> wordLists = new();
         public static Dictionary<ulong, DateTime> supportRatelimit = new();
 
+        public static int GptChance = 128;
+
         public static List<string> allowedInviteCodes = new();
         public static List<string> disallowedInviteCodes = new();
 
         static public readonly HttpClient httpClient = new();
+
+        private static string[] microsoftProducts = File.ReadAllLines("Lists/microsoft.txt");
 
         public static async Task MessageCreated(DiscordClient client, MessageCreateEventArgs e)
         {
@@ -623,6 +628,21 @@ namespace Cliptok.Events
                         await message.ModifyEmbedSuppressionAsync(true);
                     }
                 }
+                
+                // gpt stuff
+                foreach (var product in microsoftProducts)
+                {
+                    if (message.Content.Contains(product))
+                    {
+                        var shouldRespond = Program.rand.Next(GptChance) == 0;
+                        if (!shouldRespond) return;
+                        var response = await OpenAIApi.GetResponse(message.Content);
+                        if (!string.IsNullOrEmpty(response)) 
+                        {
+                           message.RespondAsync(response);
+                        }
+                    }
+                }
 
                 // Check the passive lists AFTER all other checks.
                 if (GetPermLevel(member) >= ServerPermLevel.TrialModerator)
@@ -663,6 +683,7 @@ namespace Cliptok.Events
                         }
                     }
                 }
+
             }
             catch (Exception e)
             {
@@ -749,6 +770,5 @@ namespace Cliptok.Events
                 return false;
             }
         }
-
     }
 }

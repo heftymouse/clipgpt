@@ -2,6 +2,14 @@
 {
     internal class FunCmds : BaseCommandModule
     {
+        [Command("gptrate")]
+        [HomeServer, RequireHomeserverPerm(ServerPermLevel.Moderator)]
+        public async Task GptRate(CommandContext ctx, string rate)
+        {
+            MessageEvent.GptChance = int.Parse(rate);
+            await ctx.RespondAsync($"New chance is **{rate}**.");
+        }
+
         [Command("tellraw")]
         [Description("Nothing of interest.")]
         [HomeServer, RequireHomeserverPerm(ServerPermLevel.Moderator)]
