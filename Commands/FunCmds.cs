@@ -12,7 +12,7 @@
 
         [Command("gptenable")]
         [HomeServer, RequireHomeserverPerm(ServerPermLevel.Moderator)]
-        public async Task GptEnable(CommandContext ctx, string rate)
+        public async Task GptEnable(CommandContext ctx)
         {
             MessageEvent.GptEnabled = !MessageEvent.GptEnabled;
             await ctx.RespondAsync($"Weird april fools stuff is now {(MessageEvent.GptEnabled ? "enabled" : "disabled")}");

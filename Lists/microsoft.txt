@@ -1,14 +1,19 @@
 azure
 bing
+clippy
+cmd
 edge
 excel
-m365
+linkedin
 microsoft
 microsoft 365
-clippy
 microsoft office
 outlook
 powerpoint
+powershell
+skype
+visual studio
+vscode
 windows
 word
 xbox

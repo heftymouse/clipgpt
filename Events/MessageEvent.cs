@@ -642,8 +642,12 @@ namespace Cliptok.Events
                             var response = await OpenAIApi.GetResponse(message.Content);
                             if (!string.IsNullOrEmpty(response))
                             {
-                                message.RespondAsync(response);
+                                new DiscordMessageBuilder()
+                                    .WithContent(response)
+                                    .WithReply(message.Id, mention: true)
+                                    .SendAsync(channel);
                             }
+                            break;
                         }
                     }
                 }
