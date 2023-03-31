@@ -9,6 +9,7 @@ namespace Cliptok.Events
         public static Dictionary<ulong, DateTime> supportRatelimit = new();
 
         public static int GptChance = 128;
+        public static bool GptEnabled = false;
 
         public static List<string> allowedInviteCodes = new();
         public static List<string> disallowedInviteCodes = new();
@@ -630,20 +631,23 @@ namespace Cliptok.Events
                 }
                 
                 // gpt stuff
-                foreach (var product in microsoftProducts)
+                if (GptEnabled)
                 {
-                    if (message.Content.Contains(product))
+                    foreach (var product in microsoftProducts)
                     {
-                        var shouldRespond = Program.rand.Next(GptChance) == 0;
-                        if (!shouldRespond) return;
-                        var response = await OpenAIApi.GetResponse(message.Content);
-                        if (!string.IsNullOrEmpty(response)) 
+                        if (message.Content.Contains(product))
                         {
-                           message.RespondAsync(response);
+                            var shouldRespond = Program.rand.Next(GptChance) == 0;
+                            if (!shouldRespond) return;
+                            var response = await OpenAIApi.GetResponse(message.Content);
+                            if (!string.IsNullOrEmpty(response))
+                            {
+                                message.RespondAsync(response);
+                            }
                         }
                     }
                 }
-
+               
                 // Check the passive lists AFTER all other checks.
                 if (GetPermLevel(member) >= ServerPermLevel.TrialModerator)
                     return;
