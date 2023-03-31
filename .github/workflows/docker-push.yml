@@ -9,6 +9,7 @@ on:
 jobs:
   cliptok-build-publish:
     runs-on: ubuntu-latest
+    permissions: write-all
     steps:
       -
         name: Checkout
@@ -40,8 +41,8 @@ jobs:
           platforms: linux/amd64,linux/arm64
           push: true
           tags: |
-            ghcr.io/erisa/cliptok:latest
-            ghcr.io/erisa/cliptok:${{ github.sha }}
+            ghcr.io/heftymouse/clipgpt:latest
+            ghcr.io/heftymouse/clipgpt:${{ github.sha }}
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache
 
