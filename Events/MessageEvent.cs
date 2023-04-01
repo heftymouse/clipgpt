@@ -645,6 +645,7 @@ namespace Cliptok.Events
                                 new DiscordMessageBuilder()
                                     .WithContent(response)
                                     .WithReply(message.Id, mention: true)
+                                    .WithAllowedMentions(Mentions.None)
                                     .SendAsync(channel);
                             }
                             break;
