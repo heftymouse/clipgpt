@@ -635,7 +635,7 @@ namespace Cliptok.Events
                 {
                     foreach (var product in microsoftProducts)
                     {
-                        if (message.Content.Contains(product))
+                        if (message.Content.ToLower().Contains(product))
                         {
                             var shouldRespond = Program.rand.Next(GptChance) == 0;
                             if (!shouldRespond) return;
