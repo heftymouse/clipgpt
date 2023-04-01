@@ -21,3 +21,4 @@ xbox
 zune
 github
 copilot
+autotorch
