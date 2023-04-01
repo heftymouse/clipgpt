@@ -8,8 +8,8 @@ namespace Cliptok.Events
         public static Dictionary<string, string[]> wordLists = new();
         public static Dictionary<ulong, DateTime> supportRatelimit = new();
 
-        public static int GptChance = 128;
-        public static bool GptEnabled = false;
+        public static int GptChance = 5;
+        public static bool GptEnabled = true;
 
         public static List<string> allowedInviteCodes = new();
         public static List<string> disallowedInviteCodes = new();
