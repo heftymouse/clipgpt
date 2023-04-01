@@ -1,6 +1,7 @@
 azure
 bing
 clippy
+cliptok
 cmd
 edge
 excel
@@ -18,3 +19,6 @@ windows
 word
 xbox
 zune
+github
+copilot
+
