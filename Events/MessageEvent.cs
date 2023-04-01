@@ -631,7 +631,7 @@ namespace Cliptok.Events
                 }
                 
                 // gpt stuff
-                if (GptEnabled)
+                if (GptEnabled && message.Channel.ParentId == 355974718240587777 || message.Channel.Id == 340976155123515396 || message.Channel.Id == 740272437719072808 )
                 {
                     foreach (var product in microsoftProducts)
                     {
